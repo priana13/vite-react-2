@@ -1,6 +1,6 @@
 import React from "react"
-
-import Tombol from "./components/Elements/Tombol";
+import LoginPage from "./components/Pages/Login"
+import RegisterPage from "./components/Pages/Register"
 
 
 function App() { 
@@ -8,27 +8,13 @@ function App() {
 
   return (
     <> 
-      <div className="text-center min-h-screen bg-blue-200 pt-6">
+      <div className="min-h-screen bg-slate-50 pt-6 flex items-center">
 
-        <h1 className="text-2xl">Priana Saputra</h1>
+        {/* <LoginPage /> */}
 
-        <br />
-  
+        <RegisterPage />
 
-       <Tombol bg="bg-red-700" >
-          Klik Saya
-       </Tombol>
-       <Tombol bg="bg-blue-700">
-          Klik Saya
-       </Tombol>
-       
-       <Tombol bg="bg-green-700" />
-      
-
-      </div>  
-
-     
-     
+      </div>      
      
     </>
   )
