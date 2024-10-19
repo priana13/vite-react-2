@@ -1,14 +1,18 @@
+import CardProduct from "../Elements/CardProduct/Index";
+
+
 const ProductPage = () => {
 
     return (
         <>
-            <div className="flex justify-center">
-                <div className="w-full max-w-sm bg-white border border-gray-800 rounded-lg shadow">
-                    <a href="">                       
-                        <img src="/sepatu.jpeg" alt="" className="p-8 rounded-t-lg" />
-                    </a>
-                </div>
-            </div>
+            <div className="flex justify-center gap-2"> 
+              <CardProduct />
+
+              <CardProduct />
+
+              <CardProduct />
+              
+            </div>           
         </>
     );
 }
