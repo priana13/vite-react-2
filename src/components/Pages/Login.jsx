@@ -6,9 +6,10 @@ const LoginPage = () => {
 
     return (
       
-        <AuthLayouts title="Login">
+        <AuthLayouts title="Login" type="login">
+
             <FormLogin />
-            <p>Don't have an acount? <Link className="text-blue-700" to="/register">Register Now</Link></p>
+           
         </AuthLayouts> 
     )
 }

@@ -7,10 +7,9 @@ const RegisterPage = () => {
 
     return (
       
-        <AuthLayouts title="Register">
-            <FormRegister />
+        <AuthLayouts title="Register" type="register">
 
-            <p>Has an acount? <Link className="text-blue-700" to="/login">Login Now</Link></p>
+            <FormRegister />          
 
         </AuthLayouts> 
     )
