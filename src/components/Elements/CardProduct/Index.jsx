@@ -7,7 +7,7 @@ const CardProduct = (props) => {
 
     return (
         <>            
-            <div className="w-[200px] max-w-sm bg-white border border-gray-200 rounded-lg shadow p-2 hover:scale-105 duration-100">
+            <div className="w-[200px] max-w-sm bg-white border border-gray-200 rounded-lg shadow p-2 hover:scale-105 duration-100 flex flex-col justify-between">
               
               {children}
 
@@ -33,10 +33,10 @@ const Description = (props) => {
     const {children , title} = props;
 
     return (
-        <>
+        <div className="h-full">
             <h3 className="text-xl font-bold mt-2">{title}</h3>
             <p className="my-4">{children}</p>
-        </>
+        </div>
     )
 }
 
