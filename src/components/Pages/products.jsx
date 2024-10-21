@@ -1,4 +1,5 @@
 import CardProduct from "../Elements/CardProduct/Index";
+import Tombol from "../Elements/Tombol/Index";
 
 
 const products = [
@@ -29,27 +30,42 @@ const products = [
 
 const ProductPage = () => {  
 
+    const handleLogout = () => {
+
+        localStorage.removeItem('email');
+        localStorage.removeItem('password');
+
+        window.location.href = '/login'
+    }
+
 
     return (
        
+        <>
+            <div className="flex justify-end bg-blue-500 h-15 items-center text-white">
+                <span class="mx-3">herian.sap@gmail.com</span>
+                <Tombol bg="bg-blue-600" onClick={handleLogout} > Logout </Tombol>
+            </div>
             <div className="flex justify-center gap-2"> 
            
-            {products.map((product) => {
+                {products.map((product) => {
 
-                return (
-                <CardProduct key={product.id}>
-                    <CardProduct.Image image={product.image} />
-                    <CardProduct.Description   title={product.title}  >
-                        {product.descpriction}
-                    </CardProduct.Description>
-                    <CardProduct.Footer price={product.price} />
-                </CardProduct>
-                );
+                    return (                                 
 
-            })}
+                        <CardProduct key={product.id}>
+                            <CardProduct.Image image={product.image} />
+                            <CardProduct.Description   title={product.title}  >
+                                {product.descpriction}
+                            </CardProduct.Description>
+                            <CardProduct.Footer price={product.price} />
+                        </CardProduct>                  
+                    
+                    );
+
+                })}
               
             </div>           
-      
+        </>
     );
 }
 
