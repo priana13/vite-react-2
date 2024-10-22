@@ -42,14 +42,14 @@ const Description = (props) => {
 
 const Footer = (props) => {
 
-    const {price} = props;
+    const {price , addToCart} = props;
 
     return (
     <>
-        <h2 className="text-2xl font-bold my-22">{price}</h2>
+        <h2 className="text-2xl font-bold my-22">{price.toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</h2>
 
         <div className="text-center my-3">
-            <Tombol bg="bg-blue-500 hover:bg-blue-700">Add To Cart</Tombol>                   
+            <Tombol bg="bg-blue-500 hover:bg-blue-700" handleAddToCart={addToCart}>Add To Cart</Tombol>                   
         </div> 
 
     </>
