@@ -31,13 +31,7 @@ const products = [
 
 const ProductPage = () => {  
 
-    const [cart , setCart] = useState([
-        {
-            id: 1,
-            name: "Sepatu Lama",
-            qty: 1
-        }
-    ]);
+    const [cart , setCart] = useState([]);
 
     const handleLogout = () => {
 
@@ -48,15 +42,34 @@ const ProductPage = () => {
     }
 
 
-    const handleAddToCart = () => {
-        setCart([
-            ...cart,
-            {
-                id: 1,
-                name: 'test',
-                qty: 1
-            }
-        ])
+    const handleAddToCart = (id) => {  
+        
+        if(cart.find(item => item.id == id) ) {           
+            // Buat cart baru dengan qty yang ditambahkan
+            const updatedCart = cart.map(item => {
+                if (item.id === id) {
+                    return {
+                        ...item,
+                        qty: item.qty + 1 // Tambah qty
+                    };
+                }
+                return item;
+            });
+
+            // Update state cart dengan cart yang sudah diupdate
+            setCart(updatedCart);
+
+        }else{
+            setCart([
+                ...cart,
+                {
+                    id: id,
+                    name: 'test',
+                    qty: 1
+                }
+            ])
+
+        }       
     }
    
 
@@ -75,12 +88,12 @@ const ProductPage = () => {
 
                         return (                                 
 
-                            <CardProduct key={product.id}>
+                            <CardProduct key={'prod'+product.id}>
                                 <CardProduct.Image image={product.image} />
                                 <CardProduct.Description   title={product.title}  >
                                     {product.descpriction}
                                 </CardProduct.Description>
-                                <CardProduct.Footer price={product.price} addToCart={handleAddToCart} />
+                                <CardProduct.Footer id={product.id} price={product.price} addToCart={handleAddToCart} />
                             </CardProduct>                  
                         
                         );
@@ -108,7 +121,7 @@ const ProductPage = () => {
                                     // console.log(item)
                                     return (
 
-                                        <tr className="text-center" key={item.id}>
+                                        <tr className="text-center" key={product.id}>
                                             <td>{product.title}</td>
                                             <td>{item.qty}</td>
                                             <td> {(item.qty * product.price).toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</td>
