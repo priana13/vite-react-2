@@ -1,37 +1,15 @@
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import CardProduct from "../Elements/CardProduct/Index";
 import Tombol from "../Elements/Tombol/Index";
-
-
-const products = [
-    {
-        'id' : 1, 
-        'title': 'Sepatu Baru 01',
-        'price' : 100000,
-        'descpriction' : ' Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        'image' : '/sepatu.jpeg'
-    },
-    {
-        'id' : 2, 
-        'title': 'Sepatu Baru 02',
-        'price' : 300000,
-        'descpriction' : ' Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        'image' : '/sepatu.jpeg'
-    },
-    {
-        'id' : 3, 
-        'title': 'Sepatu Baru 03',
-        'price' : 500000,
-        'descpriction' : ' Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-        'image' : '/sepatu.jpeg'
-    }
-]; 
+import axios from "axios";
+import { getProduct } from "../../services/product.service";
 
 
 
 const ProductPage = () => {  
 
     const [cart , setCart] = useState([]);
+    const [products , setProducts] = useState([]);
 
     const handleLogout = () => {
 
@@ -72,6 +50,20 @@ const ProductPage = () => {
         }       
     }
    
+    useEffect(() => {
+
+        console.log(products.length)
+
+      //  getProduct();
+
+      getProduct((data) => {
+
+        setProducts(data);        
+
+      });
+
+
+    },[]);
 
 
     return (
@@ -82,9 +74,9 @@ const ProductPage = () => {
                 <Tombol bg="bg-blue-600" onClick={handleLogout} > Logout </Tombol>
             </div>
             <div className="flex">
-                <div className="flex justify-center gap-2 w-3/4"> 
+                <div className="flex justify-center gap-2 w-3/4 flex-wrap"> 
                     
-                    {products.map((product) => {
+                    {products.length > 0 && products.map((product) => {
 
                         return (                                 
 
