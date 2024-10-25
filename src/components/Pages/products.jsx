@@ -3,6 +3,7 @@ import CardProduct from "../Elements/CardProduct/Index";
 import Tombol from "../Elements/Tombol/Index";
 import axios from "axios";
 import { getProduct } from "../../services/product.service";
+import { jwtDecode } from "jwt-decode";
 
 
 
@@ -11,10 +12,11 @@ const ProductPage = () => {
     const [cart , setCart] = useState([]);
     const [products , setProducts] = useState([]);
 
+    const [auth, setAuth] = useState('')
+
     const handleLogout = () => {
 
-        localStorage.removeItem('email');
-        localStorage.removeItem('password');
+        localStorage.removeItem('token');      
 
         window.location.href = '/login'
     }
@@ -49,12 +51,8 @@ const ProductPage = () => {
 
         }       
     }
-   
-    useEffect(() => {
 
-        console.log(products.length)
-
-      //  getProduct();
+    useEffect(() => {       
 
       getProduct((data) => {
 
@@ -65,13 +63,35 @@ const ProductPage = () => {
 
     },[]);
 
+    useEffect(() => {
+
+        if(!localStorage.getItem('token')){
+
+            window.location.href = '/login'
+
+        }else{
+
+            setAuth( jwtDecode(localStorage.getItem('token')) ) ;
+
+        }
+
+        
+        
+    },[])
+
 
     return (
        
         <Fragment >
             <div className="flex justify-end bg-blue-500 h-15 items-center text-white">
-                <span className="mx-3">herian.sap@gmail.com</span>
-                <Tombol bg="bg-blue-600" onClick={handleLogout} > Logout </Tombol>
+                <span className="mx-3">{auth.user}</span>              
+
+                <button onClick={handleLogout} type="submit" className={`text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:ring-bg-blue-600-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2`}   
+                >
+                Logout
+                </button>
+
+
             </div>
             <div className="flex">
                 <div className="flex justify-center gap-2 w-3/4 flex-wrap"> 
@@ -116,7 +136,7 @@ const ProductPage = () => {
                                         <tr className="text-center" key={product.id}>
                                             <td>{product.title}</td>
                                             <td>{item.qty}</td>
-                                            <td> {(item.qty * product.price).toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</td>
+                                            <td> ${(item.qty * product.price).toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</td>
                                         </tr>
 
                                     )

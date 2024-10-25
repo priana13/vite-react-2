@@ -46,7 +46,7 @@ const Footer = (props) => {
 
     return (
     <>
-        <h2 className="text-2xl font-bold my-22 text-center">$ {price.toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</h2>
+        <h2 className="text-2xl font-bold my-22 text-center">${price.toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</h2>
 
         <div className="text-center my-3">
             <Tombol bg="bg-blue-500 hover:bg-blue-700" id={id} handleAddToCart={addToCart}>Add To Cart</Tombol>                   
