@@ -93,7 +93,7 @@ const ProductPage = () => {
                         return (                                 
 
                             <CardProduct key={'prod'+product.id}>
-                                <CardProduct.Image image={product.image} />
+                                <CardProduct.Image image={product.image} id={product.id} />
                                 <CardProduct.Description   title={product.title}  >
                                     {product.descpriction}
                                 </CardProduct.Description>

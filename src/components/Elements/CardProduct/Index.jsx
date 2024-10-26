@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Tombol from "../Tombol/Index";
 
 
@@ -19,12 +20,12 @@ const CardProduct = (props) => {
 
 const Image = (props) => {
 
-    const {image} = props;
+    const {image, id} = props;
 
     return (
-      <a href="" className="">                       
+      <Link to={`/product/${id}`} className="">                       
         <img src={image} alt="" className="rounded-t-lg w-full h-[200px] object-cover" />
-       </a>
+       </Link>
     )
 }
 
