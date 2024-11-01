@@ -8,11 +8,13 @@ const store = configureStore({
 
 });
 
-console.log("On create store" , store.getState());
+// console.log("On create store" , store.getState());
 
 store.subscribe( () => {
 
-   console.log(  "Store Change: " , store.getState() )
+    localStorage.setItem('cart' , JSON.stringify(store.getState().cart.data)  );
+
+//    console.log( store.getState().cart.data )
 
 } );
 

@@ -1,16 +1,15 @@
 import { Fragment, useEffect, useState } from "react";
 import CardProduct from "../Elements/CardProduct/Index";
 import Tombol from "../Elements/Tombol/Index";
-import axios from "axios";
 import { getProduct } from "../../services/product.service";
 import { jwtDecode } from "jwt-decode";
 import { useLogin } from "../../hooks/useLogin";
+import TableCart from "../Fragments/TableCart";
 
 
 
-const ProductPage = () => {  
-
-    const [cart , setCart] = useState([]);
+const ProductPage = () => {
+   
     const [products , setProducts] = useState([]);
     const [auth, setAuth] = useState({});
     
@@ -24,35 +23,35 @@ const ProductPage = () => {
     }
 
 
-    const handleAddToCart = (id) => {  
+    // const handleAddToCart = (id) => {  
         
-        if(cart.find(item => item.id == id) ) {           
-            // Buat cart baru dengan qty yang ditambahkan
-            const updatedCart = cart.map(item => {
-                if (item.id === id) {
-                    return {
-                        ...item,
-                        qty: item.qty + 1 // Tambah qty
-                    };
-                }
-                return item;
-            });
+    //     if(cart.find(item => item.id == id) ) {           
+    //         // Buat cart baru dengan qty yang ditambahkan
+    //         const updatedCart = cart.map(item => {
+    //             if (item.id === id) {
+    //                 return {
+    //                     ...item,
+    //                     qty: item.qty + 1 // Tambah qty
+    //                 };
+    //             }
+    //             return item;
+    //         });
 
-            // Update state cart dengan cart yang sudah diupdate
-            setCart(updatedCart);
+    //         // Update state cart dengan cart yang sudah diupdate
+    //         setCart(updatedCart);
 
-        }else{
-            setCart([
-                ...cart,
-                {
-                    id: id,
-                    name: 'test',
-                    qty: 1
-                }
-            ])
+    //     }else{
+    //         setCart([
+    //             ...cart,
+    //             {
+    //                 id: id,
+    //                 name: 'test',
+    //                 qty: 1
+    //             }
+    //         ])
 
-        }       
-    }
+    //     }       
+    // }
 
     useEffect(() => {       
 
@@ -97,7 +96,7 @@ const ProductPage = () => {
                                 <CardProduct.Description   title={product.title}  >
                                     {product.descpriction}
                                 </CardProduct.Description>
-                                <CardProduct.Footer id={product.id} price={product.price} addToCart={handleAddToCart} />
+                                <CardProduct.Footer id={product.id} price={product.price} />
                             </CardProduct>                  
                         
                         );
@@ -109,33 +108,8 @@ const ProductPage = () => {
                 <div className="w-1/4">
 
                     <div className="mt-6 bg-gray-200 p-3 mx-5">
-                        <table className="table-auto border-separate border-2" >
-                            <thead>
-                                <tr className="text-center">
-                                    <td>Product</td>
-                                    <td>Qty</td>
-                                    <td>Price</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {cart.map((item) => {
-
-                                    const product = products.find((product) => product.id === item.id);
-
-                                    // console.log(item)
-                                    return (
-
-                                        <tr className="text-center" key={product.id}>
-                                            <td>{product.title}</td>
-                                            <td>{item.qty}</td>
-                                            <td> ${(item.qty * product.price).toLocaleString('id-ID' , {styles: 'currency' , currency: 'IDR'})}</td>
-                                        </tr>
-
-                                    )
-                                })}
-                               
-                            </tbody>
-                        </table>
+                        
+                        <TableCart products={products} />
 
                         <Tombol bg="bg-orange-600 mt-4">Checkout</Tombol>
                     </div>
