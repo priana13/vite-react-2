@@ -5,6 +5,7 @@ import { getProduct } from "../../services/product.service";
 import { jwtDecode } from "jwt-decode";
 import { useLogin } from "../../hooks/useLogin";
 import TableCart from "../Fragments/TableCart";
+import { useTotalPrice } from "../../context/TotalPriceContext";
 
 
 
@@ -21,6 +22,8 @@ const ProductPage = () => {
 
         window.location.href = '/login'
     }
+
+    const {total} = useTotalPrice()
 
 
     // const handleAddToCart = (id) => {  
@@ -76,6 +79,8 @@ const ProductPage = () => {
         <Fragment >
             <div className="flex justify-end bg-blue-500 h-15 items-center text-white">
                 <span className="mx-3">{username}</span>              
+
+                <span className="mx-2">Item: {total.toLocaleString('id-ID')}</span>
 
                 <button onClick={handleLogout} type="submit" className={`text-white bg-blue-600 hover:bg-blue-600 focus:ring-4 focus:ring-bg-blue-600-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2`}   
                 >
