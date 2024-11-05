@@ -12,6 +12,7 @@ import { Provider } from 'react-redux';
 import store from "./redux/store.js";
 import DarkModeContextProvider from './context/DarkMode.jsx';
 import { TotalPriceProvider } from './context/TotalPriceContext.jsx';
+import SimpleForm from './components/Pages/form.jsx';
 
 
 const router = createBrowserRouter([
@@ -36,6 +37,14 @@ const router = createBrowserRouter([
   {
     path: "/product/:id",
     element: <ProductDetailPage />
+  },
+  {
+    path: "/product/:id",
+    element: <ProductDetailPage />
+  },
+  {
+    path: "/form",
+    element: <SimpleForm />
   },
 
 
